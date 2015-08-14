@@ -1,0 +1,17 @@
+<ion-view view-title="There is {{ActiveFilm.pictures.length}} pictures on film {{ActiveFilm.name}}">
+    <ion-nav-buttons side="primary">
+        <button class="button button-icon icon ion-ios-minus-outline"
+            ng-click="switchDeleteView()"></button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list class="list-inset" show-delete="showDelete">
+            <ion-item class="item-remove-animate" ng-repeat="pic in ActiveFilm.pictures">
+                {{pic.index}} {{pic.name}} <em>f</em>/{{pic.aperture}} {{pic.shutter}} s
+
+                <ion-delete-button class="ion-minus-circled"
+                   ng-click="remove(pic)">
+                </ion-delete-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
