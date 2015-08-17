@@ -1,17 +1,101 @@
-<ion-view view-title="There is {{ActiveFilm.pictures.length}} pictures on film {{ActiveFilm.name}}">
+<ion-view view-title="Pictures on film {{ActiveFilm.name}}">
     <ion-nav-buttons side="primary">
+        <button class="button button-icon icon ion-ios-plus-outline"
+            ng-click="openNewPicture()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">
         <button class="button button-icon icon ion-ios-minus-outline"
             ng-click="switchDeleteView()"></button>
     </ion-nav-buttons>
     <ion-content class="padding">
         <ion-list class="list-inset" show-delete="showDelete">
-            <ion-item class="item-remove-animate" ng-repeat="pic in ActiveFilm.pictures">
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="pic in ActiveFilm.pictures | orderBy: 'index'">
                 {{pic.index}} {{pic.name}} <em>f</em>/{{pic.aperture}} {{pic.shutter}} s
 
                 <ion-delete-button class="ion-minus-circled"
                    ng-click="remove(pic)">
                 </ion-delete-button>
+
+                <button class="button button-clear button-small icon ion-edit" ng-click="openEditPicture(pic)"></button>
             </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
+
+<script id="new-picture.html" type="text/ng-template">
+
+    <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-secondary">
+            <h1 class="title">New Picture</h1>
+            <button class="button button-clear button-positive" ng-click="closeNewPicture()">Cancel</button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <form ng-submit="createPicture(newPicture)">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Index" ng-model="newPicture.index">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" ng-model="newPicture.name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Aperture" ng-model="newPicture.aperture">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Shutter speed" ng-model="newPicture.shutter">
+                    </label>
+                </div>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">Create Picture</button>
+                </div>
+            </form>
+
+        </ion-content>
+
+    </div>
+
+</script>
+
+<script id="edit-picture.html" type="text/ng-template">
+
+    <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-secondary">
+            <h1 class="title">Edit Picture</h1>
+            <button class="button button-clear button-positive" ng-click="closeEditPicture()">Cancel</button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <form ng-submit="savePicture(editedPicture)">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Index" ng-model="editedPicture.index">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" ng-model="editedPicture.name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Aperture" ng-model="editedPicture.aperture">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Shutter speed" ng-model="editedPicture.shutter">
+                    </label>
+                </div>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">Save Picture</button>
+                </div>
+            </form>
+
+        </ion-content>
+
+    </div>
+
+</script>

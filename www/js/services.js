@@ -10,8 +10,8 @@ angular.module('starter.services', [])
         iso: 200,
         exposuresCount: 36,
         pictures: [
-            {index: 0, name: 'Test exposure', aperture: 1.8, shutter: '1/125'},
-            {index: 1, name: 'Black cat', aperture: 5.6, shutter: '1/60'},
+            {index: 1, name: 'Test exposure', aperture: 1.8, shutter: '1/125'},
+            {index: 0, name: 'Black cat', aperture: 5.6, shutter: '1/60'},
             {index: 4, name: 'Green grass', aperture: 11, shutter: '1/125'},
             {index: 5, name: 'Red car', aperture: 7.1, shutter: '1/250'}
         ]
@@ -66,6 +66,14 @@ angular.module('starter.services', [])
             var pics = this.getSelected().pictures;
 
             pics.splice(pics.indexOf(picture), 1);
+        },
+        addPicture: function(picture){
+            var pics = this.getSelected().pictures;
+
+            pics.push(picture);
+        },
+        addFilm: function(film){
+            films.push(film);
         }
     };
 });

@@ -1,17 +1,97 @@
 <ion-view view-title="Films">
     <ion-nav-buttons side="primary">
+        <button class="button button-icon icon ion-ios-plus-outline"
+            ng-click="openNewFilm()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">
         <button class="button button-icon icon ion-ios-minus-outline"
             ng-click="switchDeleteView()"></button>
     </ion-nav-buttons>
     <ion-content class="padding">
         <ion-list class="list-inset" show-delete="showDelete">
-            <ion-item class="item-remove-animate" ng-repeat="film in Films" type="item-text-wrap" ng-click="select(film)" ui-sref="tab.pictures">
-                {{film.name}} {{film.iso}} {{film.exposuresCount}}
-
+            <ion-item class="item-remove-animate" ng-repeat="film in Films" ng-click="select(film)" ui-sref="tab.pictures">
                 <ion-delete-button class="ion-minus-circled"
-                ng-click="remove(film)">
-            </ion-delete-button>
+                    ng-click="remove(film)">
+                </ion-delete-button>
+
+                <ion-option-button class="button-positive"
+                       ng-click="openEditFilm(film)">
+                       Edit
+                </ion-option-button>
+
+                {{film.name}} {{film.iso}} {{film.exposuresCount}}
         </ion-item>
     </ion-list>
 </ion-content>
 </ion-view>
+
+<script id="new-film.html" type="text/ng-template">
+
+    <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-secondary">
+            <h1 class="title">New Film</h1>
+            <button class="button button-clear button-positive" ng-click="closeNewFilm()">Cancel</button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <form ng-submit="createFilm(newFilm)">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" ng-model="newFilm.name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="ISO" ng-model="newFilm.iso">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Exposures Count" ng-model="newFilm.exposuresCount">
+                    </label>
+                </div>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">Create Film</button>
+                </div>
+            </form>
+
+        </ion-content>
+
+    </div>
+
+</script>
+<script id="edit-film.html" type="text/ng-template">
+
+    <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-secondary">
+            <h1 class="title">Edit Film</h1>
+            <button class="button button-clear button-positive" ng-click="closeEditFilm()">Cancel</button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <form ng-submit="saveFilm(editedFilm)">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" ng-model="editedFilm.name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="ISO" ng-model="editedFilm.iso">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Exposures Count" ng-model="editedFilm.exposuresCount">
+                    </label>
+                </div>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">Save Film</button>
+                </div>
+            </form>
+
+        </ion-content>
+
+    </div>
+
+</script>
