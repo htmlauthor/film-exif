@@ -16,7 +16,10 @@
                    ng-click="remove(pic)">
                 </ion-delete-button>
 
-                <button class="button button-clear button-small icon ion-edit" ng-click="openEditPicture(pic)"></button>
+                <ion-option-button class="button-positive"
+                       ng-click="openEditPicture(pic)">
+                       Edit
+                </ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>

@@ -58,6 +58,7 @@ angular.module('starter.services', [])
         },
         setSelected: function(filmId){
             selectedFilm = filmId;
+            console.log(selectedFilm);
         },
         getSelected: function(){
             return this.get(selectedFilm);

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('PicturesCtrl', function($scope, $ionicModal, Films) {
+.controller('PicturesCtrl', function($scope, $ionicModal, $ionicListDelegate, Films) {
     $scope.$on('$ionicView.enter', function(e) {
         $scope.ActiveFilm = Films.getSelected();
     });
@@ -74,6 +74,7 @@ angular.module('starter.controllers', [])
 
     $scope.closeEditPicture = function() {
         $scope.editPicModal.hide();
+        $ionicListDelegate.closeOptionButtons();
     };
 
     $scope.savePicture = function(picture){
@@ -100,6 +101,7 @@ angular.module('starter.controllers', [])
     $scope.Films = Films.all();
 
     $scope.select = function(film){
+        console.log(film);
         Films.setSelected(film.id);
     }
 
@@ -137,7 +139,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.createFilm = function(film){
-        film.id = Films.length;
+        film.id = $scope.Films.length;
         film.pictures = [];
 
         Films.addFilm(film);
