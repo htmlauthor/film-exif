@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.ionictest899213" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>ionic-test</name>
+<widget id="com.ionicframework.ionictest899213" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Film exif</name>
   <description>
-        An Ionic Framework and Cordova project.
+        For those who study photography or simply enjoy using film camera. App is for taking record of each picture parameters like aperture and shutter time.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="justinas@kabasinskas.lt" href="http://justinas.kabasinskas.lt">
+      Justinas Kabasinskas
     </author>
   <content src="index.html"/>
   <access origin="*"/>
