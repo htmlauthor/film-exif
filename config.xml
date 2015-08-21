@@ -2,7 +2,7 @@
 <widget id="com.ionicframework.ionictest899213" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Film exif</name>
   <description>
-        For those who study photography or simply enjoy using film camera. App is for taking record of each picture parameters like aperture and shutter time.
+        For those who study photography or simply enjoy using film camera. App is for taking record of picture parameters like aperture and shutter time.
     </description>
   <author email="justinas@kabasinskas.lt" href="http://justinas.kabasinskas.lt">
       Justinas Kabasinskas
@@ -17,4 +17,18 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  <platform name="android">
+
+    <icon src="icons/android/drawable-hdpi/ic_launcher.png" width="72" height="72" />
+
+    <icon src="icons/android/drawable-ldpi/ic_launcher.png" width="36" height="36" />
+
+    <icon src="icons/android/drawable-mdpi/ic_launcher.png" width="48" height="48" />
+
+    <icon src="icons/android/drawable-xhdpi/ic_launcher.png" width="96" height="96" />
+
+    <icon src="icons/android/drawable-xxhdpi/ic_launcher.png" width="144" height="144" />
+
+    <icon src="icons/android/drawable-xxxhdpi/ic_launcher.png" width="192" height="192" />
+  </platform>
 </widget>
