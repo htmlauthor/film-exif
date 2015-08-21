@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.createPicture = function(pic){
-        Films.addPicture(pic);
+        Films.addPicture(pic, $scope);
 
         $scope.closeNewPicture();
     }
@@ -101,7 +101,6 @@ angular.module('starter.controllers', [])
     $scope.Films = Films.all();
 
     $scope.select = function(film){
-        console.log(film);
         Films.setSelected(film.id);
     }
 
@@ -112,7 +111,7 @@ angular.module('starter.controllers', [])
     $scope.showDelete = false;
 
     $scope.remove = function(film) {
-        Films.remove(film);
+        Films.remove(film, $scope);
     };
 
     $scope.switchDeleteView = function(){
@@ -139,10 +138,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.createFilm = function(film){
-        film.id = $scope.Films.length;
-        film.pictures = [];
-
-        Films.addFilm(film);
+        Films.addFilm(film, $scope);
 
         $scope.closeNewFilm();
     };
@@ -176,7 +172,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.saveFilm = function(editedFilm){
-        var films = Films.all();
+        var films = $scope.Films;
         var index = films.indexOf(editedFilm);
 
         if (index !== -1) {

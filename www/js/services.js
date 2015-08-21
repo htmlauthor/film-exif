@@ -1,10 +1,27 @@
-angular.module('starter.services', [])
+angular.module('ionic.utils', [])
 
-.factory('Films', function() {
-    // Might use a resource here that returns a JSON array
+.factory('$localstorage', ['$window', function($window) {
+  return {
+    set: function(key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function(key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    setObject: function(key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function(key) {
+      return JSON.parse($window.localStorage[key] || '{}');
+    }
+  }
+}]);
 
-    // Some fake testing data
-    var films = [{
+angular.module('starter.services', ['ionic', 'ionic.utils'])
+
+.factory('Films', function($localstorage) {
+
+    var starterFilms = [{
         id: 0,
         name: 'Kodak Gold',
         iso: 200,
@@ -38,17 +55,28 @@ angular.module('starter.services', [])
             {index: 3, name: 'Picture 8', aperture: 7.1, shutter: '1/250'}
         ]
     }];
+    var films = $localstorage.getObject('films');
+    if(!films.length){
+        films = starterFilms;
+    }
 
-    var selectedFilm = 0;
+    $localstorage.setObject('films', films);
+
+    var selectedFilm = $localstorage.get('selectedFilm') || 0;
+
+    $localstorage.set('selectedFilm', selectedFilm);
 
     return {
         all: function() {
             return films;
         },
-        remove: function(film) {
-            films.splice(films.indexOf(film), 1);
+        remove: function(film, $scope) {
+            $scope.Films.splice($scope.Films.indexOf(film), 1);
+
+            $localstorage.setObject('films',$scope.Films);
         },
         get: function(filmId) {
+            var films = this.all();
             for (var i = 0; i < films.length; i++) {
                 if (films[i].id === parseInt(filmId)) {
                     return films[i];
@@ -57,10 +85,10 @@ angular.module('starter.services', [])
             return null;
         },
         setSelected: function(filmId){
-            selectedFilm = filmId;
-            console.log(selectedFilm);
+            $localstorage.set('selectedFilm', filmId);
         },
         getSelected: function(){
+            var selectedFilm = $localstorage.get('selectedFilm');
             return this.get(selectedFilm);
         },
         removePicture: function(picture){
@@ -68,13 +96,25 @@ angular.module('starter.services', [])
 
             pics.splice(pics.indexOf(picture), 1);
         },
-        addPicture: function(picture){
-            var pics = this.getSelected().pictures;
+        addPicture: function(picture, $scope){
+            this.getSelected().pictures.push(picture);
 
-            pics.push(picture);
+            $localstorage.setObject('films',films);
         },
-        addFilm: function(film){
-            films.push(film);
+        addFilm: function(film, $scope){
+            var createNewFilm = function(filmInfo){
+                return {
+                    id: $scope.Films.length,
+                    name: filmInfo.name,
+                    iso: filmInfo.iso,
+                    exposuresCount: filmInfo.exposuresCount,
+                    pictures: []
+                }
+            }
+            var newFilm = createNewFilm(film);
+            $scope.Films.push(newFilm);
+
+            $localstorage.setObject('films',$scope.Films);
         }
     };
 });
